@@ -107,7 +107,7 @@ Select your app in the list.
 You will now be prompted about Hosting setup. Choose build as the public directory, then agree y to configure single-page app. You can choose to setup automatic builds and deploys with Github but this is not mandatory. If you want to see how to implement it, see you on “To go further” part. 
 
 
-You can now create your production build with npm run build. Deploy your app with firebase deploy ! 🤩
+You can now create your production build with *npm run build*. Deploy your app with *firebase deploy* ! 🤩
 
 
 You now can access your app from your hosting URL, and get more information on your app use on the project console, like check the analytics or chose a custom domain.
@@ -138,6 +138,10 @@ firebase init
 
 oopsmails/firebase-todolist
 
+## Deploy Example Log
+
+
+### Config Firebase and Setup
 
 ```
 albert@albert-mint20:~/Documents/dev/react/firebase-todolist/react-todo-list$ firebase init
@@ -171,7 +175,7 @@ Your public directory is the folder (relative to your project directory) that
 will contain Hosting assets to be uploaded with firebase deploy. If you
 have a build process for your assets, use your build's output directory.
 
-? What do you want to use as your public directory? y
+? What do you want to use as your public directory? y <----------------------------- !!! should not y, enter to use default, public. BUT, in this case, we use *build* folder, because *npm run build* is updating build folder.
 ? Configure as a single-page app (rewrite all urls to /index.html)? Yes
 ? Set up automatic builds and deploys with GitHub? Yes
 ✔  Wrote y/index.html
@@ -211,3 +215,29 @@ i  Writing project information to .firebaserc...
 ✔  Firebase initialization complete!
 albert@albert-mint20:~/Documents/dev/react/firebase-todolist/react-todo-list$ 
 ```
+
+### New Deploy
+
+- Should deploy from *build* folder, because *npm run build* is updating *build* folder
+- If using other folder, this can be configured in *firebase.json*
+
+```
+albert@albert-mint20:~/Documents/dev/react/firebase-todolist/react-todo-list$ firebase deploy
+
+=== Deploying to 'react-todo-list-9a62b'...
+
+i  deploying hosting
+i  hosting[react-todo-list-9a62b]: beginning deploy...
+i  hosting[react-todo-list-9a62b]: found 14 files in build <-------------------------- from build folder
+✔  hosting[react-todo-list-9a62b]: file upload complete
+i  hosting[react-todo-list-9a62b]: finalizing version...
+✔  hosting[react-todo-list-9a62b]: version finalized
+i  hosting[react-todo-list-9a62b]: releasing new version...
+✔  hosting[react-todo-list-9a62b]: release complete
+
+✔  Deploy complete!
+
+Project Console: https://console.firebase.google.com/project/react-todo-list-9a62b/overview
+Hosting URL: https://react-todo-list-9a62b.web.app
+```
+
