@@ -90,7 +90,7 @@ As you can see, the Form.Control and Button components call two different method
 In order to retrieve our todos from the database, we will create a new component TodoList that will retrieve and display the data. In a TodoList.tsx file :
 
 - Update your records
-In order to have a fully functional todo list, we need to complete the tasks. Let’s improve the TodoList component by making a checklist. A new changeTodoCompletion function has been added in order to check/uncheck the todos.
+In order to have a fully functional todo list, we need to complete the tasks. Let's improve the TodoList component by making a checklist. A new changeTodoCompletion function has been added in order to check/uncheck the todos.
 
 ## Deploy your application
 
@@ -117,7 +117,7 @@ If you are using a Github repository, you can chose to configure automatic deplo
 
 To do so, you need to run firebase init and select Hosting: Set up GitHub Actions deploys.
 
-As you already logged in to your Firebase account (if not, run firebase login), you won’t have to do anything for project setup. 
+As you already logged in to your Firebase account (if not, run firebase login), you won't have to do anything for project setup. 
 
 For the GitHub setup, agree to run a build before every deploy. The script to run before every deploy will be npm ci & npm run build. Now you can agree to start a deployment each time a PR is merged. Your GitHub branch associated with your app is usually main.
 
@@ -243,7 +243,7 @@ Hosting URL: https://react-todo-list-9a62b.web.app
 
 ## Github CD Error
 
-- Error with *npm ci*, *The `npm ci` command can only install with an existing package-lock*
+### Error with *npm ci*, *The `npm ci` command can only install with an existing package-lock*
 
 ```
 0s
@@ -272,7 +272,24 @@ Use npm install to add new dependencies, and to update dependencies on a project
 Use npm ci if you need a deterministic, repeatable build. For example during continuous integratio
 ```
 
+### Error: try to find *index.html* in *public* folder, instead of *build* folder
+
+```
+> react-todo-list@0.1.0 build
+> react-scripts build
+
+Could not find a required file.
+  Name: index.html
+  Searched in: /home/runner/work/firebase-todolist/firebase-todolist/react-todo-list/public
+Error: Process completed with exit code 1.
+```
 
 
+At this point we have all the information needed to set up the workflow YAML file. GitHub Actions require that workflow files live in a specific folder structure: *.github/workflow*. The CLI looks to write a file in the workflow folder called *firebase-hosting-pull-request.yml*. If you want to deploy to live on a merge to your main branch you'll also have a file called *firebase-hosting-merge.yml*.
 
+
+```
+cd react-todo-list && npm ci && npm run build && cp -rf ./build/* ../public
+
+```
 
