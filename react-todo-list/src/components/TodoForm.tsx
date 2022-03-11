@@ -27,7 +27,7 @@ const TodoForm = () => {
     <Form>
       <Form.Control onChange={handleChange} />
       <Button type="submit" onClick={addTodo}>
-        Submit2
+        Submit
       </Button>
     </Form>
   )
