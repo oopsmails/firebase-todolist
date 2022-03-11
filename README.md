@@ -280,16 +280,28 @@ Use npm ci if you need a deterministic, repeatable build. For example during con
 
 Could not find a required file.
   Name: index.html
-  Searched in: /home/runner/work/firebase-todolist/firebase-todolist/react-todo-list/public
+  Searched in: /home/runner/work/firebase-todolist/firebase-todolist/react-todo-list/public <-------------------- need copy ./build/* to ./public
 Error: Process completed with exit code 1.
 ```
 
 
 At this point we have all the information needed to set up the workflow YAML file. GitHub Actions require that workflow files live in a specific folder structure: *.github/workflow*. The CLI looks to write a file in the workflow folder called *firebase-hosting-pull-request.yml*. If you want to deploy to live on a merge to your main branch you'll also have a file called *firebase-hosting-merge.yml*.
 
+- fix: *Could not find a required file. Name: index.html*
 
 ```
-cd react-todo-list && npm ci && npm run build && cp -rf ./build/* ../public
+cd react-todo-list && npm ci && npm run build && cp -rf ./build/* ./public
+
+or
+
+in package.json, <---------------------- need to change the folder in firebase.json back to public !!!
+
+"build": "react-scripts build && cp -rf ./build/* ./public/",
 
 ```
+
+- if even getting error, *Could not find a required file.  Name: index.html*, when run *npm run build*
+, then we need to create *public* folder, with an *index.html* (even empty file ok) there!!! So, check it in github, but ignore it later.
+
+
 
