@@ -304,4 +304,23 @@ in package.json, <---------------------- need to change the folder in firebase.j
 , then we need to create *public* folder, with an *index.html* (even empty file ok) there!!! So, check it in github, but ignore it later.
 
 
+### Error: Verifying firebase.json exists
+
+Error: firebase.json file not found. If your firebase.json file is not in the root of your repo, edit the entryPoint option of this GitHub action.
+
+- from: https://github.com/FirebaseExtended/action-hosting-deploy
+
+
+entryPoint {string}
+The directory containing your firebase.json file relative to the root of your repository. Defaults to . (the root of your repo).
+
+```
+
+.github/workflows/firebase-hosting-merge.yml
+.github/workflows/firebase-hosting-pull-request.yml
+
+entryPoint: ./react-todo-list
+
+```
+
 

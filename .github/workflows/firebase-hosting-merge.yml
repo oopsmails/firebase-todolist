@@ -16,5 +16,6 @@ jobs:
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_REACT_TODO_LIST_9A62B }}'
+          entryPoint: ./react-todo-list
           channelId: live
           projectId: react-todo-list-9a62b
