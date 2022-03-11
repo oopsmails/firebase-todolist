@@ -323,4 +323,5 @@ entryPoint: ./react-todo-list
 
 ```
 
+- if we set *entryPoint*, then we can try to use *build* folder.
 
