@@ -241,3 +241,38 @@ Project Console: https://console.firebase.google.com/project/react-todo-list-9a6
 Hosting URL: https://react-todo-list-9a62b.web.app
 ```
 
+## Github CD Error
+
+- Error with *npm ci*, *The `npm ci` command can only install with an existing package-lock*
+
+```
+0s
+Run npm ci && npm run build
+npm ERR! The `npm ci` command can only install with an existing package-lock.json or
+npm ERR! npm-shrinkwrap.json with lockfileVersion >= 1. Run an install with npm@5 or
+npm ERR! later to generate a package-lock.json file, then try again.
+
+npm ERR! A complete log of this run can be found in:
+npm ERR!     /home/runner/.npm/_logs/2022-03-11T18_15_53_388Z-debug-0.log
+Error: Process completed with exit code 1.
+```
+
+GithubCD-Error.png
+
+- The reason is NOT in *react-todo-list* folder, fixed in *firebase-todolist/.github/workflows/firebase-hosting-merge.yml*
+
+
+```
+Essentially, npm install reads package.json to create a list of dependencies and uses package-lock.json to inform which versions of these dependencies to install. If a dependency is not in package-lock.json it will be added by npm install.
+
+npm ci (also known as Clean Install) is mean to be used in automated environments such as test platforms, continuous integration, and deployment -- or any situation where you want to make sure you're doing a clean install of your dependencies. It installs dependencies directly from package-lock.json and uses package.json only to validate that there are no mismatched versions. If any dependencies are missing or have incompatible versions, it will throw an error.
+
+Use npm install to add new dependencies, and to update dependencies on a project. Usually, you would use it during development after pulling changes that update the list of dependencies but it may be a good idea to use npm ci in this case.
+
+Use npm ci if you need a deterministic, repeatable build. For example during continuous integratio
+```
+
+
+
+
+
